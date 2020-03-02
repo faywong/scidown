@@ -206,12 +206,11 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
 	ext_definition ext = {NULL, NULL};
 	if (data.renderer == RENDERER_HTML) {
 		ext.extra_header =
-                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css\" crossorigin=\"anonymous\">"
-                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/xcode.min.css\">"
-                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.css\" crossorigin=\"anonymous\">\n"
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/katex.min.js\" crossorigin=\"anonymous\"></script>\n"
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.9.0-alpha2/contrib/auto-render.min.js\" crossorigin=\"anonymous\"></script>\n"
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js\"></script>"
+                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css\" crossorigin=\"anonymous\">"
+                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/xcode.min.css\">"
+                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js\" crossorigin=\"anonymous\"></script>\n"
+                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js\" crossorigin=\"anonymous\"></script>\n"
+                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js\"></script>"
                 "<script src=\"https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js\"></script>"
 							;
 		ext.extra_closing = "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});</script>\n";
