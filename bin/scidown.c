@@ -109,7 +109,7 @@ print_help(const char *basename)
 	print_option(  0, "html", "Render (X)HTML. The default.");
 	print_option(  0, "latex", "Render as LATEX.");
 	print_option(  0, "html-toc", "Render the Table of Contents in (X)HTML.");
-	
+
 
 	print_option('T', "time", "Show time spent in rendering.");
 	print_option('i', "input-unit=N", "Reading block size. Default is " str(DEF_IUNIT) ".");
@@ -206,14 +206,24 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
 	ext_definition ext = {NULL, NULL};
 	if (data.renderer == RENDERER_HTML) {
 		ext.extra_header =
-                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css\" crossorigin=\"anonymous\">"
-                "<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/xcode.min.css\">"
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.js\" crossorigin=\"anonymous\"></script>\n"
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js\" crossorigin=\"anonymous\"></script>\n"
-                "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js\"></script>"
-                "<script src=\"https://cdn.jsdelivr.net/npm/mermaid@8.4.0/dist/mermaid.min.js\"></script>"
+                "<link rel=\"stylesheet\" href=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/katex.min.css\" crossorigin=\"anonymous\">"
+                "<link rel=\"stylesheet\" href=\"qrc:/web_res/ajax/libs/highlight.js/9.18.1/styles/xcode.min.css\">"
+                "<script src=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/katex.min.js\" crossorigin=\"anonymous\"></script>\n"
+                "<script src=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js\" crossorigin=\"anonymous\"></script>\n"
+                "<script src=\"qrc:/web_res/ajax/libs/highlight.js/9.18.1/highlight.min.js\"></script>"
+                "<script src=\"qrc:/web_res/npm/mermaid@8.4.0/dist/mermaid.min.js\"></script>"
 							;
-		ext.extra_closing = "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});</script>\n";
+		ext.extra_closing = "<style>@font-face {\n"
+                            "    font-family: 'HiraginoSans';\n"
+                            "    src: url('qrc:/web_res/HiraginoSansGBW6.otf');\n"
+                            "    font-weight: 300;\n"
+                            "    font-style: normal;\n"
+                            "  }"
+                            "body {"
+                            "   font-family: 'HiraginoSans';"
+                            "}"
+                            " </style>"
+		        "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});</script>\n";
 	}
 	document = hoedown_document_new(renderer, data.extensions, &ext, NULL, data.max_nesting);
 
