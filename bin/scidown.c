@@ -215,7 +215,7 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
 							;
 		ext.extra_closing = "<style>@font-face {\n"
                             "    font-family: 'HiraginoSans';\n"
-                            "    src: url('qrc:/web_res/HiraginoSansGBW6.otf');\n"
+                            "    src: url('qrc:/web_res/Hiragino-Sans-GB-W3.ttf');\n"
                             "    font-weight: 300;\n"
                             "    font-style: normal;\n"
                             "  }"
