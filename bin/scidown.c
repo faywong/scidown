@@ -208,10 +208,12 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
 		ext.extra_header =
                 "<link rel=\"stylesheet\" href=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/katex.min.css\" crossorigin=\"anonymous\">"
                 "<link rel=\"stylesheet\" href=\"qrc:/web_res/ajax/libs/highlight.js/9.18.1/styles/xcode.min.css\">"
+                "<link rel=\"stylesheet\" href=\"qrc:/web_res/scidown_article.css\">"
                 "<script src=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/katex.min.js\" crossorigin=\"anonymous\"></script>\n"
                 "<script src=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js\" crossorigin=\"anonymous\"></script>\n"
                 "<script src=\"qrc:/web_res/ajax/libs/highlight.js/9.18.1/highlight.min.js\"></script>"
                 "<script src=\"qrc:/web_res/npm/mermaid@8.4.0/dist/mermaid.min.js\"></script>"
+                "<script src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>"
 							;
 		ext.extra_closing = "<style>@font-face {\n"
                             "    font-family: 'HiraginoSans';\n"
@@ -223,7 +225,10 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
                             "   font-family: 'HiraginoSans';"
                             "}"
                             " </style>"
-		        "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});</script>\n";
+		        "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});    "
+                "var channel = new QWebChannel(qt.webChannelTransport, function (channel) {\n"
+                "console.log(\" web channel ok\");"
+                            "    });</script>\n";
 	}
 	document = hoedown_document_new(renderer, data.extensions, &ext, NULL, data.max_nesting);
 
