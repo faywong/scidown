@@ -208,7 +208,7 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
 		ext.extra_header =
                 "<link rel=\"stylesheet\" href=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/katex.min.css\" crossorigin=\"anonymous\">"
                 "<link rel=\"stylesheet\" href=\"qrc:/web_res/ajax/libs/highlight.js/9.18.1/styles/xcode.min.css\">"
-                "<link rel=\"stylesheet\" href=\"qrc:/web_res/scidown_article.css\">"
+                "<link rel=\"stylesheet\" href=\"qrc:/web_res/scidown_report.css\">"
                 "<script src=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/katex.min.js\" crossorigin=\"anonymous\"></script>\n"
                 "<script src=\"qrc:/web_res/ajax/libs/KaTeX/0.11.1/contrib/auto-render.min.js\" crossorigin=\"anonymous\"></script>\n"
                 "<script src=\"qrc:/web_res/ajax/libs/highlight.js/9.18.1/highlight.min.js\"></script>"
