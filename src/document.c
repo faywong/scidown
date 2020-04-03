@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 #include "stack.h"
-
+#include "utf8.h"
 #ifndef _MSC_VER
 #include <strings.h>
 #else
@@ -156,9 +156,9 @@ struct hoedown_document {
  {
  	if (!pre || !str)
  		return 0;
-    size_t lenpre = strlen(pre),
-           lenstr = strlen(str);
-    return lenstr < lenpre ? 0 : strncmp(pre, str, lenpre) == 0;
+    size_t lenpre = utf8len(pre),
+           lenstr = utf8len_s(str, lenpre);
+    return lenstr < lenpre ? 0 : utf8ncmp(pre, str, lenpre) == 0;
  }
 
 int
