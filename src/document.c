@@ -2050,8 +2050,10 @@ parse_fencedcode(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_
 	text.data = data + text_start;
 	text.size = line_start - text_start;
 
-	if (doc->md.blockcode)
-		doc->md.blockcode(ob, text.size ? &text : NULL, lang.size ? &lang : NULL, &doc->data);
+	if (doc->md.blockcode) {
+        printf("fun:%s() ob: %p, text: %p, lang: %p", __FUNCTION__, ob, &text, &lang);
+        doc->md.blockcode(ob, text.size ? &text : NULL, lang.size ? &lang : NULL, &doc->data);
+    }
 
 	return i;
 }

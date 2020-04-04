@@ -7,5 +7,5 @@
 
 #include <stdint.h>
 #include <stddef.h>
-extern "C" int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data, size_t* output_size);
+extern "C" int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data, size_t* output_size, int screen_height);
 #endif //SYNCFOLDER_SCIDOWN_MD_H

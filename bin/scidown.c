@@ -168,7 +168,7 @@ struct option_data {
 	size_t max_nesting;
 };
 
-int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data, size_t* output_size)
+int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data, size_t* output_size, int screen_height)
 {
 	struct option_data data;
 	clock_t t1, t2;
@@ -215,7 +215,7 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
                 "<script src=\"qrc:/web_res/npm/mermaid@8.4.0/dist/mermaid.min.js\"></script>"
                 "<script src=\"qrc:///qtwebchannel/qwebchannel.js\"></script>"
 							;
-		ext.extra_closing = "<style>@font-face {\n"
+        ext.extra_closing = "<style>@font-face {\n"
                             "    font-family: 'HiraginoSans';\n"
                             "    src: url('qrc:/web_res/Hiragino-Sans-GB-W3.ttf');\n"
                             "    font-weight: 300;\n"
@@ -223,11 +223,12 @@ int md2html(const uint8_t* input_data, size_t input_size, uint8_t** output_data,
                             "  }"
                             "body {"
                             "   font-family: 'HiraginoSans';"
+                            "   background: #FFF;"
                             "}"
                             " </style>"
-		        "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});    "
-                "var channel = new QWebChannel(qt.webChannelTransport, function (channel) {\n"
-                "console.log(\" web channel ok\");"
+                            "<script>renderMathInElement(document.body); hljs.initHighlightingOnLoad(); mermaid.initialize({startOnLoad:true});    "
+                            "var channel = new QWebChannel(qt.webChannelTransport, function (channel) {\n"
+                            "console.log(\" web channel ok\");"
                             "    });</script>\n";
 	}
 	document = hoedown_document_new(renderer, data.extensions, &ext, NULL, data.max_nesting);
