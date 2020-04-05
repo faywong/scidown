@@ -692,7 +692,7 @@ rndr_head(hoedown_buffer *ob, metadata * doc_meta, ext_definition * extension)
 		hoedown_buffer_puts(ob, extension->extra_header);
 	}
 
-	hoedown_buffer_puts(ob, "</head>\n<body>\n");
+	hoedown_buffer_puts(ob, "</head>\n<body class=\"markdown-body\">\n");
 }
 
 static void

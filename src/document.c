@@ -2051,7 +2051,7 @@ parse_fencedcode(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_
 	text.size = line_start - text_start;
 
 	if (doc->md.blockcode) {
-        printf("fun:%s() ob: %p, text: %p, lang: %p\n", __FUNCTION__, ob, &text, &lang);
+        printf("fun:%s() ob: %p, text: %p, lang: %p, data: %p\n", __FUNCTION__, ob, text.size ? &text : NULL, lang.size ? &lang : NULL, &doc->data);
         doc->md.blockcode(ob, text.size ? &text : NULL, lang.size ? &lang : NULL, &doc->data);
     }
 
@@ -2110,20 +2110,21 @@ parse_listitem(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t 
 	size_t beg = 0, end, pre, sublist = 0, orgpre = 0, i;
 	int in_empty = 0, has_inside_empty = 0, in_fence = 0;
 
+    hoedown_table_flags nFlags = 0;
 	/* keeping track of the first indentation prefix */
 	while (orgpre < 3 && orgpre < size && data[orgpre] == ' ')
 		orgpre++;
 
 	beg = prefix_checkbox(data, size);
 	if (beg > 0) {
-	    *flags |= HOEDOWN_LI_WITH_CHECKBOX;
+        nFlags |= HOEDOWN_LI_WITH_CHECKBOX;
 	}
 
 	if (!beg)
 		beg=prefix_checkbox_checked(data,size);
 
     if (beg > 0) {
-        *flags |= HOEDOWN_LI_WITH_CHECKED_CHECKBOX;
+        nFlags |= HOEDOWN_LI_WITH_CHECKED_CHECKBOX;
     }
 
 	if (!beg)
@@ -2244,7 +2245,7 @@ parse_listitem(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t 
 
 	/* render of li itself */
 	if (doc->md.listitem)
-		doc->md.listitem(ob, inter, *flags, &doc->data);
+		doc->md.listitem(ob, inter, *flags | nFlags, &doc->data);
 
 	popbuf(doc, BUFFER_SPAN);
 	popbuf(doc, BUFFER_SPAN);
