@@ -69,7 +69,9 @@ typedef enum hoedown_extensions {
 
 typedef enum hoedown_list_flags {
 	HOEDOWN_LIST_ORDERED = (1 << 0),
-	HOEDOWN_LI_BLOCK = (1 << 1)	/* <li> containing block data */
+	HOEDOWN_LI_BLOCK = (1 << 1),	/* <li> containing block data */
+    HOEDOWN_LI_WITH_CHECKBOX = (1 << 2),	/* <li> with checkbox */
+    HOEDOWN_LI_WITH_CHECKED_CHECKBOX = (1 << 3)	/* <li> with checked checkbox */
 } hoedown_list_flags;
 
 typedef enum hoedown_table_flags {

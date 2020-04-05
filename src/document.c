@@ -2115,8 +2115,17 @@ parse_listitem(hoedown_buffer *ob, hoedown_document *doc, uint8_t *data, size_t 
 		orgpre++;
 
 	beg = prefix_checkbox(data, size);
+	if (beg > 0) {
+	    *flags |= HOEDOWN_LI_WITH_CHECKBOX;
+	}
+
 	if (!beg)
 		beg=prefix_checkbox_checked(data,size);
+
+    if (beg > 0) {
+        *flags |= HOEDOWN_LI_WITH_CHECKED_CHECKBOX;
+    }
+
 	if (!beg)
 		beg = prefix_uli(data, size);
 	if (!beg)

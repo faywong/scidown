@@ -349,15 +349,20 @@ rndr_list(hoedown_buffer *ob, const hoedown_buffer *content, hoedown_list_flags 
 static void
 rndr_listitem(hoedown_buffer *ob, const hoedown_buffer *content, hoedown_list_flags flags, const hoedown_renderer_data *data)
 {
-	HOEDOWN_BUFPUTSL(ob, "<li>");
 	if (content) {
+	    if (flags & HOEDOWN_LI_WITH_CHECKBOX) {
+            HOEDOWN_BUFPUTSL(ob, "<li> <input type=\"checkbox\">");
+	    } else if (flags & HOEDOWN_LI_WITH_CHECKED_CHECKBOX) {
+            HOEDOWN_BUFPUTSL(ob, "<li class=\"task-list-done\">");
+            HOEDOWN_BUFPUTSL(ob, "<input type=\"checkbox\" checked>");
+	    }
 		size_t size = content->size;
 		while (size && content->data[size - 1] == '\n')
 			size--;
 
 		hoedown_buffer_put(ob, content->data, size);
-	}
-	HOEDOWN_BUFPUTSL(ob, "</li>\n");
+        HOEDOWN_BUFPUTSL(ob, "</li>\n");
+    }
 }
 
 static void
