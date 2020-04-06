@@ -99,7 +99,7 @@ rndr_autolink(hoedown_buffer *ob, const hoedown_buffer *link, hoedown_autolink_t
 static void
 rndr_blockcode(hoedown_buffer *ob, const hoedown_buffer *text, const hoedown_buffer *lang, const hoedown_renderer_data *data)
 {
-    printf("fun:%s() ob: %p, text: %p, lang: %p\n", __FUNCTION__, ob, text, lang);
+    printf("xxxooo fun:%s() ob: %p, text: %p, lang: %p\n", __FUNCTION__, ob, text, lang);
 	if (ob->size) hoedown_buffer_putc(ob, '\n');
 	hoedown_html_renderer_state *state = data->opaque;
 	if (lang && (state->flags & SCIDOWN_RENDER_CHARTER) != 0 && hoedown_buffer_eqs(lang, "charter") != 0){
@@ -350,12 +350,14 @@ static void
 rndr_listitem(hoedown_buffer *ob, const hoedown_buffer *content, hoedown_list_flags flags, const hoedown_renderer_data *data)
 {
 	if (content) {
-	    if (flags & HOEDOWN_LI_WITH_CHECKBOX) {
-            HOEDOWN_BUFPUTSL(ob, "<li> <input type=\"checkbox\">");
-	    } else if (flags & HOEDOWN_LI_WITH_CHECKED_CHECKBOX) {
-            HOEDOWN_BUFPUTSL(ob, "<li class=\"task-list-done\">");
-            HOEDOWN_BUFPUTSL(ob, "<input type=\"checkbox\" checked>");
-	    }
+        HOEDOWN_BUFPUTSL(ob, "<li>");
+//        if (flags) {
+//            HOEDOWN_BUFPUTSL(ob, "<li> <input type=\"checkbox\">");
+//            HOEDOWN_BUFPUTSL(ob, "<li> <input type=\"checkbox\">");
+//	    } else if (flags & HOEDOWN_LI_WITH_CHECKED_CHECKBOX) {
+//            HOEDOWN_BUFPUTSL(ob, "<li class=\"task-list-done\">");
+//            HOEDOWN_BUFPUTSL(ob, "<input type=\"checkbox\" checked>");
+//	    }
 		size_t size = content->size;
 		while (size && content->data[size - 1] == '\n')
 			size--;
