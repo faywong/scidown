@@ -103,7 +103,7 @@ rndr_blockcode(hoedown_buffer *ob, const hoedown_buffer *text, const hoedown_buf
 	if (ob->size) hoedown_buffer_putc(ob, '\n');
 	hoedown_html_renderer_state *state = data->opaque;
 	if (lang && (state->flags & SCIDOWN_RENDER_CHARTER) != 0 && hoedown_buffer_eqs(lang, "charter") != 0){
-		if (text){
+		if (text) {
 
 			char * copy = malloc((text->size + 1)*sizeof(char));
 			memset(copy, 0, text->size+1);
@@ -122,9 +122,10 @@ rndr_blockcode(hoedown_buffer *ob, const hoedown_buffer *text, const hoedown_buf
 		}
 		return;
 	}
+	 // start
 	if (lang &&  (state->flags & SCIDOWN_RENDER_GNUPLOT) != 0 && hoedown_buffer_eqs(lang, "gnuplot"))
 	{
-		if (text && text->size){
+		if (text && text->size) {
 			char * copy = malloc((text->size + 1)*sizeof(char));
 			memset(copy, 0, text->size+1);
 			memcpy(copy, text->data, text->size);
@@ -133,29 +134,33 @@ rndr_blockcode(hoedown_buffer *ob, const hoedown_buffer *text, const hoedown_buf
 
 			FILE *p = popen((char*)b->data, "r");
 			hoedown_buffer_free(b);
-			char buffer[MAX_FILE_SIZE];
-			size_t i;
-			for (i = 0; i < MAX_FILE_SIZE; ++i)
-			{
-			    int c = getc(p);
+			char *buffer = (char *)malloc(MAX_FILE_SIZE);
+			if (buffer) {
+                size_t i;
+                for (i = 0; i < MAX_FILE_SIZE; ++i)
+                {
+                    int c = getc(p);
 
-			    if (c == EOF)
-			    {
-			        buffer[i] = 0x00;
-			        break;
-			    }
+                    if (c == EOF)
+                    {
+                        buffer[i] = 0x00;
+                        break;
+                    }
 
-			    buffer[i] = c;
-			}
-			if (i)
-			{
-				hoedown_buffer_printf(ob, buffer, i);
+                    buffer[i] = c;
+                }
+                if (i)
+                {
+                    hoedown_buffer_printf(ob, buffer, i);
+                }
+                free(buffer);
 			}
 		}
 
 		return;
 	}
-	if (lang && (state->flags & SCIDOWN_RENDER_MERMAID) != 0 && hoedown_buffer_eqs(lang, "mermaid") != 0){
+	// end
+    if (lang && (state->flags & SCIDOWN_RENDER_MERMAID) != 0 && hoedown_buffer_eqs(lang, "mermaid") != 0){
 		if (text){
 	        HOEDOWN_BUFPUTSL(ob, "<div class=\"mermaid\">");
 			hoedown_buffer_put(ob, text->data, text->size);

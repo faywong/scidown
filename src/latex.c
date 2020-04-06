@@ -96,10 +96,9 @@ rndr_blockcode(hoedown_buffer *ob, const hoedown_buffer *text, const hoedown_buf
 {
 	if (ob->size) hoedown_buffer_putc(ob, '\n');
 
-
     scidown_latex_renderer_state *state = data->opaque;
 	if (lang && (state->flags & SCIDOWN_RENDER_CHARTER) != 0 && hoedown_buffer_eqs(lang, "charter") != 0){
-		if (text){
+		if (text) {
 
 			char * copy = malloc((text->size + 1)*sizeof(char));
 			memset(copy, 0, text->size+1);
